@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script>
+// Email confirmation links land here: send them to the confirmation page and drop the sign-in details from the address.
+(function () {
+  var all = location.hash + '&' + location.search;
+  if (/error(_code|_description)?=/.test(all)) location.replace('/confirmed/?failed');
+  else if (/access_token=|type=signup|[?&]code=/.test(all)) location.replace('/confirmed/');
+})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Night Vybes: See the vibe before you go</title>

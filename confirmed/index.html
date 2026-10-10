@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email confirmed | Night Vybes</title>
+<meta name="description" content="Your Night Vybes email is confirmed.">
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0B0D">
+</head>
+<body>
+<header><a class="brand" href="/"><span class="brand-mark"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="15 23 72 54" width="36" height="27"><defs><mask id="nvm"><rect x="-100" y="-100" width="300" height="300" fill="white"/><circle cx="53" cy="41" r="21" fill="black"/></mask></defs>
+<circle cx="42" cy="50" r="25" fill="#FF3B4E" mask="url(#nvm)"/>
+<rect x="60" y="43" width="6" height="14" rx="3" fill="#FFFFFF"/>
+<rect x="69.5" y="35" width="6" height="30" rx="3" fill="#F5B700"/>
+<rect x="79" y="40" width="6" height="20" rx="3" fill="#FFFFFF"/></svg></span>Night Vybes</a><nav><a href="/guidelines">Community Guidelines</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/venues">For venues</a></nav></header>
+<main>
+<div id="ok">
+<h1>Your email is confirmed</h1>
+<p>You're all set. Go back to the <strong>Night Vybes</strong> app and log in with your email and password.</p>
+<p>You can close this page.</p>
+</div>
+<div id="bad" hidden>
+<h1>This link didn't work</h1>
+<p>The confirmation link has expired or was already used. If you already confirmed, just go back to the Night Vybes app and log in.</p>
+<p>Otherwise, open the app and create your account again to get a new link, or email <a href="mailto:support@nightvybes.com">support@nightvybes.com</a>.</p>
+</div>
+<script>
+if (location.search.indexOf('failed') !== -1) {
+  document.getElementById('ok').hidden = true;
+  document.getElementById('bad').hidden = false;
+}
+</script>
+</main>
+<footer><p><a href="/guidelines">Community Guidelines</a><a href="/terms">Terms of Service</a><a href="/privacy">Privacy Policy</a><a href="/venues">Venue Terms</a></p><p>Night Vybes is operated by Harry Agyei, Texas, USA. Contact: <a href="mailto:support@nightvybes.com">support@nightvybes.com</a></p></footer>
+</body>
+</html>

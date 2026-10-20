@@ -3,8 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found | Night Vybes</title>
-<meta name="description" content="Page not found">
+<title>Night Vybes</title>
+<meta name="description" content="See the vibe before you go. Real videos from bars, clubs and lounges tonight, all over the world.">
+<meta property="og:title" content="Night Vybes">
+<meta property="og:description" content="See the vibe before you go. Real videos from bars, clubs and lounges tonight, all over the world.">
+<meta property="og:image" content="https://nightvybes.com/icon-512.png">
 <link rel="stylesheet" href="/style.css">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -16,9 +19,58 @@
 <rect x="60" y="43" width="6" height="14" rx="3" fill="#FFFFFF"/>
 <rect x="69.5" y="35" width="6" height="30" rx="3" fill="#F5B700"/>
 <rect x="79" y="40" width="6" height="20" rx="3" fill="#FFFFFF"/></svg></span>Night Vybes</a><nav><a href="/guidelines">Community Guidelines</a><a href="/terms">Terms</a><a href="/privacy">Privacy</a><a href="/venues">For venues</a></nav></header>
-<main>
+<main id="main">
 <h1>Page not found</h1><p><a href="/">Back to Night Vybes</a></p>
 </main>
+<style>
+.share{max-width:480px;margin:24px auto;padding:28px 24px;border-radius:24px;background:#121016;border:1px solid #1F1C25;text-align:center;position:relative;overflow:hidden}
+.share .glow{position:absolute;left:50%;top:-120px;width:320px;height:320px;margin-left:-160px;border-radius:50%;background:radial-gradient(circle,rgba(255,59,78,.55),rgba(255,59,78,0) 70%);pointer-events:none}
+.share h1{position:relative;font-size:30px;margin:8px 0 6px}
+.share .tag{position:relative;display:inline-block;padding:6px 12px;border-radius:14px;background:#FF3B4E;color:#fff;font-weight:700;font-size:14px}
+.share p{position:relative;color:#A49DAF}
+.share .btn{position:relative;display:block;margin:12px auto 0;max-width:320px;padding:14px 18px;border-radius:16px;font-weight:700;text-decoration:none}
+.share .primary{background:#FF3B4E;color:#fff}
+.share .secondary{background:#16141B;color:#F4F2F7;border:1px solid #2C2833}
+.share code{background:#16141B;padding:2px 8px;border-radius:8px;color:#F5B700}
+</style>
+<script>
+(function () {
+  var URL_ = 'https://crrvsgcddiqscrworkpe.supabase.co';
+  var KEY = 'sb_publishable_t4PkniSUkrmJkPYoshCGUw_y3fXVAIQ';
+  var GET_APP = '/'; // replace with the App Store link once Night Vybes is live
+  var m = location.pathname.match(/^\/(v|p|i)\/([^\/?#]+)/i);
+  if (!m) return;
+  var kind = m[1].toLowerCase(), id = decodeURIComponent(m[2]);
+  var main = document.getElementById('main');
+  var appLink = 'nightvybes://' + kind + '/' + encodeURIComponent(id);
+  function esc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function card(inner) {
+    main.innerHTML = '<div class="share"><div class="glow"></div>' + inner +
+      '<a class="btn primary" href="' + appLink + '">Open in Night Vybes</a>' +
+      '<a class="btn secondary" href="' + GET_APP + '">Get the app</a></div>';
+  }
+  card('<h1>Night Vybes</h1><p>Loading…</p>');
+  fetch(URL_ + '/rest/v1/rpc/public_share', {
+    method: 'POST', headers: { 'apikey': KEY, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ p_kind: kind, p_id: id })
+  }).then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || d.code) { card('<h1>Night Vybes</h1><p>This link has expired, but the night is still going. See what\'s hot near you in the app.</p>'); return; }
+    if (kind === 'i') {
+      document.title = '@' + d.username + ' invited you to Night Vybes';
+      card('<span class="tag">🎁 Free week of Plus</span><h1>' + esc(d.display_name || d.username) + ' invited you</h1>' +
+        '<p>See real videos from bars, clubs and lounges before you go. When you sign up, put <code>' + esc(d.username) +
+        '</code> under “Invited by” and you both get a free week of Night Vybes Plus.</p>');
+      return;
+    }
+    var place = [d.category, d.city].filter(Boolean).join(' · ');
+    var status = kind === 'v' && d.live === false ? 'That video has ended. ' : '';
+    var tonight = d.videos_tonight > 0 ? d.videos_tonight + (d.videos_tonight === 1 ? ' video' : ' videos') + ' from tonight' : 'No videos yet tonight';
+    document.title = d.name + ' | Night Vybes';
+    card('<span class="tag">' + (d.videos_tonight > 0 ? '🔥 ' : '') + esc(d.name) + '</span><h1>See the vibe</h1>' +
+      '<p>' + esc(place) + '</p><p>' + esc(status + tonight) + '. Watch them in the Night Vybes app.</p>');
+  }).catch(function () { card('<h1>Night Vybes</h1><p>See the vibe before you go. Open this in the app.</p>'); });
+})();
+</script>
 <footer><p><a href="/guidelines">Community Guidelines</a><a href="/terms">Terms of Service</a><a href="/privacy">Privacy Policy</a><a href="/venues">Venue Terms</a></p><p>Night Vybes is operated by Harry Agyei, Texas, USA. Contact: <a href="mailto:support@nightvybes.com">support@nightvybes.com</a></p></footer>
 </body>
 </html>
